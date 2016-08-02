@@ -8,7 +8,8 @@ const saltRounds = 10;
 
 let userSchema = mongoose.Schema({
   username: {type: String, required: true, unique: true},
-  password: {type: String, required: true}
+  password: {type: String, required: true},
+  admin: Boolean
 });
 
 userSchema.methods.generateHash = function(password) {
@@ -17,21 +18,20 @@ userSchema.methods.generateHash = function(password) {
       if (err) return reject(err);
       this.password = hash;
       console.log('hashed: ' + hash);
-      resolve(token stuff);
+      resolve({token: jwt.sign({idd: this.username}, process.env.APP_SECRET)});
     });
   });
 };
 
 userSchema.methods.checkPassword = function(password) {
-  //load hash password
   return new Promise((resolve, reject) => {
-    bcrypt.compare(password, hash, (err, comparison) => {
+    bcrypt.compare(password, this.password, (err, comparison) => {
       if (err) return reject(err);
       if (comparison === false)
-        return reject(new createError(403, 'Forbidden'));
-        resolve(token stuff);
+        return reject(new createError(403, 'Authentication error. Something did not match'));
+      resolve({token: jwt.sign({idd: this.username}, process.env.APP_SECRET)});
     });
   });
 };
 
-module.exports = exports = mongoose.model('User', UserSchema);
+module.exports = exports = mongoose.model('User', userSchema);
