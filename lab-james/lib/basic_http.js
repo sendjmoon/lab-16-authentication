@@ -2,12 +2,9 @@
 
 module.exports = exports = function(req, res, next) {
   try {
-    let header = req.headers.authorization;
-    let basicString = header.split(' ')[1];
-    let authBuffer = new Buffer(basicString, 'base64');
-    let authString = authBuffer.toString();
-    let authArr = authString.split(':');
-    req.auth = {username: authArr[0], password: authArr[1]};
+    let authBuffer = new Buffer(req.headers.authorization.split(' ')[1], 'base64');
+    let authArray = authBuffer.toString().split(':');
+    req.auth = {username: authArray[0], password: authArray[1]};
     authBuffer.fill(0);
     next();
   } catch(e) {
