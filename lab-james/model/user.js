@@ -25,8 +25,9 @@ userSchema.methods.checkPassword = function(password) {
   return new Promise((resolve, reject) => {
     bcrypt.compare(password, this.password, (err, comparison) => {
       if (err) return reject(err);
-      if (comparison === false)
+      if (comparison === false) {
         return reject('wtf');
+      }
       resolve({token: jwt.sign({idd: this._id}, process.env.APP_SECRET)});
     });
   });

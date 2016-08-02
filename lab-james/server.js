@@ -14,7 +14,6 @@ mongoose.connect(LOCAL_DB_SERVER);
 
 const authRouter = require('./route/auth_router');
 
-
 app.use(morgan('dev'));
 app.use('/api/auth', authRouter);
 

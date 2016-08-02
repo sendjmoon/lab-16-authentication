@@ -6,14 +6,11 @@ const request = chai.request;
 const expect = chai.expect;
 const mongoose = require('mongoose');
 
-const User = require('../model/user');
-
 const TEST_DB_SERVER = 'mongodb://localhost/test_db';
 process.env.DB_SERVER = TEST_DB_SERVER;
 
 let app = require('./test_server');
 let server;
-let testUser;
 
 describe('Testing Authentication for signup and signin', () => {
   before((done) => {
@@ -48,6 +45,17 @@ describe('Testing Authentication for signup and signin', () => {
       .end((err, res) => {
         expect(err).to.have.status(400);
         expect(res.text).to.eql('Bad request');
+        done();
+      });
+  });
+
+  it('/GET should signin with the new user', (done) => {
+    request('localhost:5000')
+      .get('/api/auth/signin')
+      .auth('dude','helloworld')
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
         done();
       });
   });

@@ -32,8 +32,7 @@ authRouter.get('/signin', BasicHTTP, (req, res, next) => {
   User.findOne({'username': req.auth.username})
     .then((user) => {
       if (!user) next(authError);
-      user.checkPassword(req.auth.password)
+      return user.checkPassword(req.auth.password)
         .then(res.json.bind(res), authError);
-    });
-  next(authError);
+    }, authError);
 });
