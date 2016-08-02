@@ -1,0 +1,23 @@
+{
+  "name": "lab-james",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "http-errors": "^1.5.0",
+    "jsonwebtoken": "^7.1.7",
+    "morgan": "^1.7.0"
+  }
+}
