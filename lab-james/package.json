@@ -1,7 +1,7 @@
 {
   "name": "lab-james",
   "version": "1.0.0",
-  "description": "",
+  "description": "Lab ",
   "main": "server.js",
   "directories": {
     "test": "test"
