@@ -59,4 +59,14 @@ describe('Testing Authentication for signup and signin', () => {
         done();
       });
   });
+  it('/GET should send back a 401 error with authentication error', (done) => {
+    request('localhost:5000')
+      .get('/api/auth/signin')
+      .auth('james', 'moon')
+      .end((err, res) => {
+        expect(err).to.have.status(401);
+        expect(res.text).to.have.string('Authentication failed');
+        done();
+      });
+  });
 });
