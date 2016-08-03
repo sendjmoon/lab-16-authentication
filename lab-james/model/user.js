@@ -10,8 +10,7 @@ const saltRounds = 10;
 let userSchema = mongoose.Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
-  role: {type: String, required: true, default: 'basic'},
-  wranglerId: String
+  role: {type: String, required: true, default: 'basic'}
 });
 
 userSchema.methods.generateHash = function(password) {

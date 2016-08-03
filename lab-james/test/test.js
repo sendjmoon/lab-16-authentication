@@ -26,15 +26,14 @@ describe('Testing Authentication for signup and signin', () => {
     });
   });
 
-  it('/POST should signup a new user', (done) => {
+  it('/POST should signup a new user and respond with their json web token', (done) => {
     request('localhost:5000')
       .post('/api/auth/signup')
       .send({username:'dude', password:'helloworld'})
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
-        expect(res.text).to.have.string('dude');
-        expect(res.text).to.have.string('password');
+        expect(res.text).to.have.string('token');
         done();
       });
   });
@@ -49,13 +48,14 @@ describe('Testing Authentication for signup and signin', () => {
       });
   });
 
-  it('/GET should signin with the new user', (done) => {
+  it('/GET should signin with the new user and provide the json web token', (done) => {
     request('localhost:5000')
       .get('/api/auth/signin')
       .auth('dude','helloworld')
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
+        expect(res.text).to.have.string('token');
         done();
       });
   });

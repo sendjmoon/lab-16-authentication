@@ -16,4 +16,4 @@ This is done via a POST request. The format to follow is `http :3000/api/auth/si
 This is done via a GET request. The format to follow is `http -a username:password :3000/api/auth/signin`. The server will respond with a JSON web token.
 
 ## Testing
-Simply run `mocha/test test` or `npm test`.
+To run using `gulp`, simply type `gulp` or `gulp task_name` for specific tasks. Otherwise, type `mocha/test test` or `npm test`.

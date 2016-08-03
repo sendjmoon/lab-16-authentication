@@ -1,7 +1,6 @@
 'use strict';
 const Router = require('express').Router;
 const jsonParser = require('body-parser').json();
-
 const createError = require('http-errors');
 const BasicHTTP = require('../lib/basic_http');
 
@@ -15,7 +14,6 @@ authRouter.post('/signup', jsonParser, (req, res, next) => {
   let newUser = new User();
   newUser.username = req.body.username;
   newUser.password = req.body.password;
-  newUser.wranglerId = req.body._id;
   newUser.generateHash(req.body.password)
     .then((token) => {
       newUser.save((err, user) => {
@@ -25,7 +23,9 @@ authRouter.post('/signup', jsonParser, (req, res, next) => {
           res.json(token);
         }
       });
-    }, badError);
+    }).catch((err) => {
+      next(err);
+    });
 });
 
 authRouter.get('/signin', BasicHTTP, (req, res, next) => {
@@ -39,5 +39,5 @@ authRouter.get('/signin', BasicHTTP, (req, res, next) => {
       .catch((err) => {
         next(err);
       });
-  }, authError);
+  });
 });

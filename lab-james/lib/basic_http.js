@@ -7,9 +7,9 @@ module.exports = exports = function(req, res, next) {
     req.auth = {username: authArray[0], password: authArray[1]};
     authBuffer.fill(0);
     next();
-  } catch(e) {
-    e.statusCode = 400;
-    e.message = 'Invalid BasicHTTP Authentication';
-    next(e);
+  } catch(error) {
+    error.statusCode = 400;
+    error.message = 'Invalid BasicHTTP Authentication';
+    next(error);
   }
 };

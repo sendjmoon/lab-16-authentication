@@ -17,11 +17,6 @@ const authRouter = require('../route/auth_router');
 app.use(morgan('dev'));
 app.use('/api/auth', authRouter);
 
-app.use((req, res, next) => {
-  let newError = createError(404, 'Page not found');
-  next(newError);
-});
-
 app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).send(err.message || 'Database error');
   next();
