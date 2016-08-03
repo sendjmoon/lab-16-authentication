@@ -15,9 +15,11 @@ let LOCAL_DB_SERVER = process.env.MONGOLAB_URI || 'mongodb://localhost/dev_db';
 mongoose.connect(LOCAL_DB_SERVER);
 
 const authRouter = require('./route/auth_router');
+const heroRouter = require('./route/hero_router');
 
 app.use(morgan('dev'));
 app.use('/api/auth', authRouter);
+app.use('/api/hero', heroRouter);
 
 app.use((err, req, res, next) => {
   serverError(err);

@@ -2,6 +2,7 @@
 
 module.exports = exports = function(req, res, next) {
   try {
+    console.log(req.headers);
     let authBuffer = new Buffer(req.headers.authorization.split(' ')[1], 'base64');
     let authArray = authBuffer.toString().split(':');
     req.auth = {username: authArray[0], password: authArray[1]};
